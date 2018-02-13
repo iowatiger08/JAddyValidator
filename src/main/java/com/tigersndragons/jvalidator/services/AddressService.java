@@ -16,7 +16,7 @@ public class AddressService implements IAddressService<AddressRequest, AddressRe
     public AddressResponse process(AddressRequest request) {
         AddressResponse aResponse =addressDAO.get(
                 request.Input_Address.toUpperCase(), 
-                request.getInput_City().toUpperCase(), 
+                request.Input_City.toUpperCase(), 
                 request.Input_State.toUpperCase(), 
                 request.Input_Zip.toUpperCase());
         if (aResponse == null || aResponse.getId() == null){
