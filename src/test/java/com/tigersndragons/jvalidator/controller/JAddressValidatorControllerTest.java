@@ -24,7 +24,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
 
     private JAddressValidatorController controller;
     public static String ALL_FIELDS_REQUIRED="All fields required request.";
-    private String DefaultGetUrlwParams = "Input_Zip=50309&Input_Address=666%20Grand%20Avenue&Input_City=Des%20Moines&Input_State=IA&Input_Country=US";
+    //private String DefaultGetUrlwParams = "Input_Zip=50309&Input_Address=666%20Grand%20Avenue&Input_City=Des%20Moines&Input_State=IA&Input_Country=US";
             //"http://dev01/Address/index/new-client?Input_Zip=50309&Input_Address=666%20Grand%20Avenue&Input_City=Des%20Moines&Input_State=IA&Input_Country=US"
     @Mock
     private IAddressService<AddressRequest,AddressResponse> mockAddressService ;
@@ -98,7 +98,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
         AddressRequest request = BuildTestRequest();
         request.Input_Zip4 =null;
         AddressResponse response = controller.postRequest(request).getBody();
-        assertThat(response.getP_ErrorMsg(), nullValue(String.class));        
+        assertThat(response.getP_ErrorMsg(), is(equalTo("")));        
     } 
     //"Input_Zip=50309&Input_Address=666%20Grand%20Avenue&Input_City=Des%20Moines&Input_State=IA&Input_Country=US"
     @Test
@@ -153,7 +153,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
                 (req.Input_Zip, req.Input_Address, req.Input_City, req.Input_State, req.Input_Country)
                 .getBody();
 
-        assertThat(response.getP_ErrorMsg(), nullValue(String.class)); 
+        assertThat(response.getP_ErrorMsg(), is(equalTo(""))); 
         
     }
     

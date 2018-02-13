@@ -10,14 +10,8 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.tigersndragons.jvalidator.BaseTestCase;
-import com.tigersndragons.jvalidator.config.AppConfig;
-import com.tigersndragons.jvalidator.dao.AddressDAO;
 import com.tigersndragons.jvalidator.models.AddressResponse;
 
 public class AddressDAOTests extends BaseTestCase{

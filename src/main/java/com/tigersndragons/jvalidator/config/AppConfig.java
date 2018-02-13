@@ -10,13 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.tigersndragons.jvalidator.controller.JAddressValidatorController;
-import com.tigersndragons.jvalidator.dao.AddressDAO;
-import com.tigersndragons.jvalidator.models.AddressRequest;
-import com.tigersndragons.jvalidator.models.AddressResponse;
-import com.tigersndragons.jvalidator.services.AddressService;
-import com.tigersndragons.jvalidator.services.IAddressService;
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.tigersndragons.jvalidator" )

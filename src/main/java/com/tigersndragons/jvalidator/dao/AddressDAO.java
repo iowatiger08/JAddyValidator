@@ -3,13 +3,10 @@ package com.tigersndragons.jvalidator.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.tigersndragons.jvalidator.models.AddressResponse;
 
