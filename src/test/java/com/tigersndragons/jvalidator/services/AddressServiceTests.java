@@ -15,12 +15,11 @@ import com.tigersndragons.jvalidator.models.AddressResponse;
 public class AddressServiceTests extends BaseTestCase {
 
     private AddressService addressService;
-    private AddressDAO addressDAO;
     
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         addressService = new AddressService();
-        addressService.setDataSource(addressDAO);
+        addressService.setDataSource(new AddressDAO());
     }
     
     @Test
@@ -32,7 +31,7 @@ public class AddressServiceTests extends BaseTestCase {
     @Test
     (expected=NullPointerException.class)
     public void processPartialRequest(){
-        AddressRequest request =  BuildTestRequest();
+        AddressRequest request =  buildTestRequest();
         request.Input_Address=null;
         addressService.process(request);     
     }
@@ -42,39 +41,9 @@ public class AddressServiceTests extends BaseTestCase {
 
         //when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
         addressService.setDataSource(new AddressDAO());
-        AddressRequest request =  BuildTestRequest();
+        AddressRequest request =  buildTestRequest();
         
         AddressResponse response = addressService.process(request);  
-        assertThat(response.getP_Address(), is(equalTo(BuildDefaultTestResponse().getP_Address().toUpperCase())));
-    }
-    
-
-    private AddressRequest BuildTestRequest(){
-        AddressRequest request = new AddressRequest();     
-        request.Input_Address = BuildDefaultTestResponse().getP_Address();
-        request.Input_City = BuildDefaultTestResponse().getP_City();
-        request.Input_Country = "US";
-        request.Input_State = BuildDefaultTestResponse().getP_State();
-        request.Input_Zip = BuildDefaultTestResponse().getP_Zip();
-        request.Input_Zip4 = BuildDefaultTestResponse().getP_Zip4();
-        return request;
-    }
-    private AddressResponse BuildDefaultTestResponse(){
-        Double latitude = 41.58751;
-        Double longitude = -93.62614;
-        AddressResponse anAddress = new AddressResponse();
-                anAddress.setP_Address("666 Grand Ave");
-                anAddress.setP_City ( "Des Moines");
-                anAddress.setP_ErrorCode ( "");
-                anAddress.setP_ErrorMsg ( "");
-                anAddress.setP_Latitude ( latitude);
-                anAddress.setP_Longitude ( longitude);
-                anAddress.setP_Timezone ( "C");
-                anAddress.setP_State ( "IA");
-                anAddress.setP_Zip ( "50309");
-                anAddress.setP_Zip4 ( "2506");
-                anAddress.setP_Country ( "US");
-        
-        return anAddress;
+        assertThat(response.getP_Address(), is(equalTo(buildDefaultTestResponse().getP_Address().toUpperCase())));
     }
 }

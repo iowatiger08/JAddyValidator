@@ -19,7 +19,7 @@ public class AddressDAOTests extends BaseTestCase{
     private AddressDAO addressDAO;
     
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         addressDAO = new AddressDAO();
     }
     
@@ -52,24 +52,5 @@ public class AddressDAOTests extends BaseTestCase{
         Map<Long, AddressResponse> mapOfAddresses = addressDAO.mappedList();
         assertThat(mapOfAddresses.get(2L).getP_Address(), 
                 is(not(equalTo(mapOfAddresses.get(3L).getP_Address()))));
-    }
-    
-    private AddressResponse buildDefaultTestResponse(){
-        Double latitude = 41.58751;
-        Double longitude = -93.62614;
-        AddressResponse anAddress = new AddressResponse();
-                anAddress.setP_Address("666 Grand Ave");
-                anAddress.setP_City ( "Des Moines");
-                anAddress.setP_ErrorCode ( "");
-                anAddress.setP_ErrorMsg ( "");
-                anAddress.setP_Latitude ( latitude);
-                anAddress.setP_Longitude ( longitude);
-                anAddress.setP_Timezone ( "C");
-                anAddress.setP_State ( "IA");
-                anAddress.setP_Zip ( "50309");
-                anAddress.setP_Zip4 ( "2506");
-                anAddress.setP_Country ( "US");
-        
-        return anAddress;
     }
 }

@@ -2,7 +2,6 @@ package com.tigersndragons.jvalidator.controller;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
@@ -27,8 +26,9 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
             //"http://dev01/Address/index/new-client?Input_Zip=50309&Input_Address=666%20Grand%20Avenue&Input_City=Des%20Moines&Input_State=IA&Input_Country=US"
     @Mock
     private IAddressService<AddressRequest,AddressResponse> mockAddressService ;
+    
 	@Before
-	public void setUp() throws Exception {
+	public void setUp()  {
 	    MockitoAnnotations.initMocks(this);
 	    controller = new JAddressValidatorController();
 	    controller.setAddressService (mockAddressService);
@@ -162,34 +162,5 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
          *  testAddy.P_ErrorCode = "ERR";
             testAddy.P_ErrorMsg = "Connection Or Command failed. The connection cannot be opened because the connection timed out.";
          */
-    }
-    
-    private AddressRequest buildTestRequest(){
-        AddressRequest request = new AddressRequest();     
-        request.Input_Address = buildDefaultTestResponse().getP_Address();
-        request.Input_City = buildDefaultTestResponse().getP_City();
-        request.Input_Country = "US";
-        request.Input_State = buildDefaultTestResponse().getP_State();
-        request.Input_Zip = buildDefaultTestResponse().getP_Zip();
-        request.Input_Zip4 = buildDefaultTestResponse().getP_Zip4();
-        return request;
-    }
-    private AddressResponse buildDefaultTestResponse(){
-        Double latitude = 41.58751;
-        Double longitude = -93.62614;
-        AddressResponse anAddress = new AddressResponse();
-                anAddress.setP_Address("666 Grand Ave".toUpperCase());
-                anAddress.setP_City ( "Des Moines".toUpperCase());
-                anAddress.setP_ErrorCode ( "");
-                anAddress.setP_ErrorMsg ( "");
-                anAddress.setP_Latitude ( latitude);
-                anAddress.setP_Longitude ( longitude);
-                anAddress.setP_Timezone ( "C");
-                anAddress.setP_State ( "IA");
-                anAddress.setP_Zip ( "50309");
-                anAddress.setP_Zip4 ( "2506");
-                anAddress.setP_Country ( "US");
-        
-        return anAddress;
     }
 }
