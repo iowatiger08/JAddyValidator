@@ -19,8 +19,10 @@ public class AddressService implements IAddressService<AddressRequest, AddressRe
                 request.Input_City.toUpperCase(), 
                 request.Input_State.toUpperCase(), 
                 request.Input_Zip.toUpperCase());
+
         if (aResponse == null || aResponse.getId() == null){
             //do google api validate
+            aResponse = new AddressResponse();
             aResponse.setP_Address(request.Input_Address.toUpperCase());
             aResponse.setP_City(request.Input_City.toUpperCase());
             aResponse.setP_State(request.Input_State.toUpperCase());

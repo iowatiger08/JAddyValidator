@@ -18,7 +18,7 @@ public class AddressDAO {
         // TODO Auto-generated constructor stub
     }
 
-    public static List<AddressResponse> addresses;
+    private static List<AddressResponse> addresses;
     {
         addresses = new ArrayList<AddressResponse>();
         Double latitude = 41.58751;
@@ -38,7 +38,7 @@ public class AddressDAO {
         return addresses;
     }
     
-
+//not tested
     public AddressResponse get(Long id) {
 
         /*for (AddressResponse c : addresses) {
@@ -79,14 +79,13 @@ public class AddressDAO {
 
 
     public AddressResponse get(String input_Address, String input_City, String input_State, String input_Zip) {
-       
-        AddressResponse filtered = addresses.stream()
+
+        return addresses.stream()
                 .filter(a -> input_Address.equals(a.getP_Address()))
                 .filter(a -> input_City.equals(a.getP_City()))
                 .filter(a -> input_State.equals(a.getP_State()))
                 .filter(a -> input_Zip.equals(a.getP_Zip()))
                 .findAny()
-                .orElse(null); 
-        return filtered;
+                .orElse(null);
     }
 }

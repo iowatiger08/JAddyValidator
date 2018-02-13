@@ -26,7 +26,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
             //"http://dev01/Address/index/new-client?Input_Zip=50309&Input_Address=666%20Grand%20Avenue&Input_City=Des%20Moines&Input_State=IA&Input_Country=US"
     @Mock
     private IAddressService<AddressRequest,AddressResponse> mockAddressService ;
-    
+
 	@Before
 	public void setUp()  {
 	    MockitoAnnotations.initMocks(this);
