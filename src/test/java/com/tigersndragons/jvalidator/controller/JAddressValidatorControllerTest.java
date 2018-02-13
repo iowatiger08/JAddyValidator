@@ -94,6 +94,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
     
     @Test
     public void testPostInputZip4Missing(){
+        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
         AddressRequest request = BuildTestRequest();
         request.Input_Zip4 =null;
         AddressResponse response = controller.postRequest(request).getBody();
@@ -102,6 +103,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
     //"Input_Zip=50309&Input_Address=666%20Grand%20Avenue&Input_City=Des%20Moines&Input_State=IA&Input_Country=US"
     @Test
     public void testGetWithTestParams(){
+        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
 
         AddressRequest req= BuildTestRequest();
         AddressResponse response= controller.getByParams
@@ -145,6 +147,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
     }
     @Test
     public void TestGetWithParamsMissingZip4(){
+        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
         AddressRequest req= BuildTestRequest();
         AddressResponse response= controller.getByParams
                 (req.Input_Zip, req.Input_Address, req.Input_City, req.Input_State, req.Input_Country)

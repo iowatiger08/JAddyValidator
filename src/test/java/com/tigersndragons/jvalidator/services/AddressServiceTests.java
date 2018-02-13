@@ -3,6 +3,8 @@ package com.tigersndragons.jvalidator.services;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
 import org.hamcrest.core.Is;
 import org.junit.Before;
@@ -16,10 +18,12 @@ import com.tigersndragons.jvalidator.models.AddressResponse;
 public class AddressServiceTests extends BaseTestCase {
 
     private AddressService addressService;
+    private AddressDAO addressDAO;
     
     @Before
     public void setUp() throws Exception {
         addressService = new AddressService();
+        addressService.setDataSource(addressDAO);
     }
     
     @Test
@@ -38,6 +42,9 @@ public class AddressServiceTests extends BaseTestCase {
     
     @Test
     public void processFullRequest(){
+
+        //when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
+        addressService.setDataSource(new AddressDAO());
         AddressRequest request =  BuildTestRequest();
         
         AddressResponse response = addressService.process(request);  

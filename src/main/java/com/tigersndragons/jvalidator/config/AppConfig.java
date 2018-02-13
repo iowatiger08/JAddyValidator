@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.tigersndragons.jvalidator.controller.JAddressValidatorController;
 import com.tigersndragons.jvalidator.dao.AddressDAO;
 import com.tigersndragons.jvalidator.models.AddressRequest;
 import com.tigersndragons.jvalidator.models.AddressResponse;
