@@ -31,7 +31,7 @@ public class AddressDAOTests extends BaseTestCase{
     
     @Test
     public void createAddressTest(){
-        AddressResponse anAddress = BuildDefaultTestResponse();
+        AddressResponse anAddress = buildDefaultTestResponse();
         AddressResponse result = addressDAO.create(anAddress);
         assertThat(result.getId(), not(nullValue(Long.class)));
     }
@@ -54,7 +54,7 @@ public class AddressDAOTests extends BaseTestCase{
                 is(not(equalTo(mapOfAddresses.get(3L).getP_Address()))));
     }
     
-    private AddressResponse BuildDefaultTestResponse(){
+    private AddressResponse buildDefaultTestResponse(){
         Double latitude = 41.58751;
         Double longitude = -93.62614;
         AddressResponse anAddress = new AddressResponse();

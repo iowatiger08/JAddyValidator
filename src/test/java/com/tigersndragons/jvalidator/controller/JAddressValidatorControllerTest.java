@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.tigersndragons.jvalidator.BaseTestCase;
-import com.tigersndragons.jvalidator.controller.JAddressValidatorController;
 import com.tigersndragons.jvalidator.models.AddressRequest;
 import com.tigersndragons.jvalidator.models.AddressResponse;
 import com.tigersndragons.jvalidator.services.IAddressService;
@@ -37,9 +36,9 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
 
 	@Test
 	public void testPost() {
-	    when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
-	    AddressResponse response = controller.postRequest(BuildTestRequest()).getBody();
-	    assertThat(response.getP_Address(), is(equalTo(BuildDefaultTestResponse().getP_Address())));
+	    when(mockAddressService.process(any(AddressRequest.class))).thenReturn(buildDefaultTestResponse());
+	    AddressResponse response = controller.postRequest(buildTestRequest()).getBody();
+	    assertThat(response.getP_Address(), is(equalTo(buildDefaultTestResponse().getP_Address())));
 	}
 	@Ignore
 	@Test
@@ -56,7 +55,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
     
 	@Test
 	public void testPostInputAddressMissing(){
-	    AddressRequest request = BuildTestRequest();
+	    AddressRequest request = buildTestRequest();
 	    request.Input_Address =null;
         AddressResponse response = controller.postRequest(request).getBody();
         assertThat(response.getP_ErrorMsg(), is(equalTo(ALL_FIELDS_REQUIRED)));	    
@@ -64,7 +63,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
 	
     @Test
     public void testPostInputCityMissing(){
-        AddressRequest request = BuildTestRequest();
+        AddressRequest request = buildTestRequest();
         request.Input_City =null;
         AddressResponse response = controller.postRequest(request).getBody();
         assertThat(response.getP_ErrorMsg(), is(equalTo(ALL_FIELDS_REQUIRED)));           
@@ -72,21 +71,21 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
     
     @Test
     public void testPostInputStateMissing(){
-        AddressRequest request = BuildTestRequest();
+        AddressRequest request = buildTestRequest();
         request.Input_State =null;
         AddressResponse response = controller.postRequest(request).getBody();
         assertThat(response.getP_ErrorMsg(), is(equalTo(ALL_FIELDS_REQUIRED)));        
     }  
     @Test
     public void testPostInputZipMissing(){
-        AddressRequest request = BuildTestRequest();
+        AddressRequest request = buildTestRequest();
         request.Input_Zip =null;
         AddressResponse response = controller.postRequest(request).getBody();
         assertThat(response.getP_ErrorMsg(), is(equalTo(ALL_FIELDS_REQUIRED)));   
     }   
     @Test
     public void testPostInputCountryMissing(){
-        AddressRequest request = BuildTestRequest();
+        AddressRequest request = buildTestRequest();
         request.Input_Country =null;
         AddressResponse response = controller.postRequest(request).getBody();
         assertThat(response.getP_ErrorMsg(), is(equalTo(ALL_FIELDS_REQUIRED)));   
@@ -94,8 +93,8 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
     
     @Test
     public void testPostInputZip4Missing(){
-        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
-        AddressRequest request = BuildTestRequest();
+        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(buildDefaultTestResponse());
+        AddressRequest request = buildTestRequest();
         request.Input_Zip4 =null;
         AddressResponse response = controller.postRequest(request).getBody();
         assertThat(response.getP_ErrorMsg(), is(equalTo("")));        
@@ -103,26 +102,26 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
     //"Input_Zip=50309&Input_Address=666%20Grand%20Avenue&Input_City=Des%20Moines&Input_State=IA&Input_Country=US"
     @Test
     public void testGetWithTestParams(){
-        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
+        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(buildDefaultTestResponse());
 
-        AddressRequest req= BuildTestRequest();
+        AddressRequest req= buildTestRequest();
         AddressResponse response= controller.getByParams
                 (req.Input_Zip, req.Input_Address, req.Input_City, req.Input_State, req.Input_Country)
                 .getBody();
 
-        assertThat(response.getP_Latitude(), is(equalTo(BuildDefaultTestResponse().getP_Latitude()))); 
-        assertThat(response.getP_Longitude(), is(equalTo(BuildDefaultTestResponse().getP_Longitude()))); 
+        assertThat(response.getP_Latitude(), is(equalTo(buildDefaultTestResponse().getP_Latitude())));
+        assertThat(response.getP_Longitude(), is(equalTo(buildDefaultTestResponse().getP_Longitude())));
     }
     
     @Test
-    public void TestGetWithParamsMissingAddress(){
+    public void testGetWithParamsMissingAddress(){
         AddressResponse response = controller.getByParams
                 ("Input_Zip", "", "Input_City", "Input_State", "Input_Country")
                 .getBody();
         assertThat(response.getP_ErrorMsg(), is(equalTo(ALL_FIELDS_REQUIRED)));  
     }
     @Test
-    public void TestGetWithParamsMissingCity(){
+    public void testGetWithParamsMissingCity(){
         AddressResponse response = controller.getByParams
                 ("Input_Zip", "DES MOINES", "", "Input_State", "Input_Country")
                 .getBody();
@@ -130,7 +129,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
         
     }  
     @Test
-    public void TestGetWithParamsMissingState(){
+    public void testGetWithParamsMissingState(){
         AddressResponse response = controller.getByParams
                 ("Input_Zip", "DES MOINES", "Input_City", "", "Input_Country")
                 .getBody();
@@ -138,7 +137,7 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
         
     }
     @Test
-    public void TestGetWithParamsMissingZip(){
+    public void testGetWithParamsMissingZip(){
         AddressResponse response = controller.getByParams
                 (null, "Input_Address", "Input_City", "Input_State", "Input_Country")
                 .getBody();
@@ -146,9 +145,9 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
         //Assert.That(result.P_ErrorMsg, Is.EqualTo("All fields required request."));
     }
     @Test
-    public void TestGetWithParamsMissingZip4(){
-        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(BuildDefaultTestResponse());
-        AddressRequest req= BuildTestRequest();
+    public void testGetWithParamsMissingZip4(){
+        when(mockAddressService.process(any(AddressRequest.class))).thenReturn(buildDefaultTestResponse());
+        AddressRequest req= buildTestRequest();
         AddressResponse response= controller.getByParams
                 (req.Input_Zip, req.Input_Address, req.Input_City, req.Input_State, req.Input_Country)
                 .getBody();
@@ -165,17 +164,17 @@ public class JAddressValidatorControllerTest extends BaseTestCase{
          */
     }
     
-    private AddressRequest BuildTestRequest(){
+    private AddressRequest buildTestRequest(){
         AddressRequest request = new AddressRequest();     
-        request.Input_Address = BuildDefaultTestResponse().getP_Address();
-        request.Input_City = BuildDefaultTestResponse().getP_City();
+        request.Input_Address = buildDefaultTestResponse().getP_Address();
+        request.Input_City = buildDefaultTestResponse().getP_City();
         request.Input_Country = "US";
-        request.Input_State = BuildDefaultTestResponse().getP_State();
-        request.Input_Zip = BuildDefaultTestResponse().getP_Zip();
-        request.Input_Zip4 = BuildDefaultTestResponse().getP_Zip4();
+        request.Input_State = buildDefaultTestResponse().getP_State();
+        request.Input_Zip = buildDefaultTestResponse().getP_Zip();
+        request.Input_Zip4 = buildDefaultTestResponse().getP_Zip4();
         return request;
     }
-    private AddressResponse BuildDefaultTestResponse(){
+    private AddressResponse buildDefaultTestResponse(){
         Double latitude = 41.58751;
         Double longitude = -93.62614;
         AddressResponse anAddress = new AddressResponse();
